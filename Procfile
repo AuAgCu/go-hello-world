@@ -1,1 +1,1 @@
-web: go-test2
+web: bin/go-test2
