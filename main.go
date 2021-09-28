@@ -1,6 +1,8 @@
 package main
 
 import (
+	"os"
+
 	"github.com/labstack/echo"
 
 	"app/handlers"
@@ -11,5 +13,5 @@ func main() {
 	e.File("/", "public/index.html")
 	e.GET("/tasks", handlers.GetTasks)
 
-	e.Start(":8080")
+	e.Start(":" + os.Getenv("PORT"))
 }
