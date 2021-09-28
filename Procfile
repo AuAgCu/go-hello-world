@@ -1,1 +1,1 @@
-web: bin/go-hello-world
+web: go-hello-world2021
