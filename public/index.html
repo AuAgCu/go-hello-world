@@ -1,0 +1,41 @@
+<html>
+    <head>
+        <!-- Vue.js -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.24/vue.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/0.7.0/vue-resource.min.js"></script>
+    </head>
+    <body>
+        <div>
+            <h1>Hello Vue.js</h1>
+            <button v-on:click="showTask">Hello, World</button>
+            <button v-on:click="clearTask">clear</button>
+            <ul>
+                <li v-for="task in tasks">
+                    {{ task.name }}
+                </li>
+            </ul>
+        </div>
+        <script>
+            new Vue({
+                el: 'body',
+
+                data: {
+                    tasks: [],
+                },
+
+                methods: {
+                  showTask: function() {
+                      // Use the vue-resource $http client to fetch data from the /tasks route
+                      this.$http.get('/tasks').then(function(response) {
+                          // this.tasks = response.data.items ? response.data.items : []
+                          this.tasks.push(response.data.items[0])
+                      })
+                  },
+                  clearTask: function() {
+                      this.tasks = [];
+                  }
+                }
+            })
+        </script>
+    </body>
+</html>
