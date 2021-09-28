@@ -1,1 +1,1 @@
-web: bin/golang-sample
+web: bin/main
