@@ -24,6 +24,6 @@ func (ur *UserRepositoryImpl) CreateUser(user *models.User) {
 
 func (ur *UserRepositoryImpl) GetUserById(id int) models.User {
 	user := models.User{}
-	ur.db.QueryRow("SELECT * FROM t_user where user_id = ?", id).Scan(&user.ID, &user.LAST_NAME, &user.FIRST_NAME)
+	ur.db.QueryRow("SELECT * FROM t_user where user_id = $1", id).Scan(&user.ID, &user.LAST_NAME, &user.FIRST_NAME)
 	return user
 }
