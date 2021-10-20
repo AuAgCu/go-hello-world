@@ -25,8 +25,8 @@ func NewUserHandler(userService service.UserService) UserHandler {
 
 func (userHandler UserHandlerImpl) GetUser(c echo.Context) error {
 	id, _ := strconv.Atoi(c.Param("id"))
-	userHandler.userService.GetUserById(id)
-	return c.JSON(http.StatusOK, models.GetUser())
+	user := userHandler.userService.GetUserById(id)
+	return c.JSON(http.StatusOK, user)
 }
 
 func (userHandler UserHandlerImpl) CreateUser(c echo.Context) error {
