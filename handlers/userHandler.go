@@ -30,14 +30,16 @@ func (userHandler UserHandlerImpl) GetUser(c echo.Context) error {
 }
 
 func (userHandler UserHandlerImpl) CreateUser(c echo.Context) error {
-	println("hogehoge")
-	firstName := c.FormValue("firstName")
-	lastName := c.FormValue("lastName")
+	param := new(models.User)
+	//バインドしてJSON取得
+	if err := c.Bind(param); err != nil {
+		return err
+	}
 
-	println(firstName)
-	println(lastName)
+	println(param.FIRST_NAME)
+	println(param.LAST_NAME)
 
-	userHandler.userService.CreateUser(lastName, firstName)
+	userHandler.userService.CreateUser(param.LAST_NAME, param.FIRST_NAME)
 
 	return c.JSON(http.StatusOK, "hoge")
 }
