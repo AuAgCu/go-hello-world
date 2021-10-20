@@ -24,5 +24,5 @@ func (this UserServiceImpl) CreateUser(lastName string, firstName string) {
 }
 
 func (userService UserServiceImpl) GetUserById(id int) models.User {
-	return userService.GetUserById(id)
+	return userService.userRepository.GetUserById(id)
 }
