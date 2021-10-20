@@ -19,9 +19,8 @@ func NewUserReporitory(db *sql.DB) UserRepository {
 }
 
 func (ur *UserRepositoryImpl) CreateUser(user *models.User) {
-	result, err := ur.db.Exec("INSERT INTO t_user (first_name, last_name) VALUES (?, ?)", user.FIRST_NAME, user.LAST_NAME)
+	_, err := ur.db.Exec("INSERT INTO t_user (first_name, last_name) VALUES (?, ?)", user.FIRST_NAME, user.LAST_NAME)
 	println(err.Error())
-	println(result.LastInsertId())
 }
 
 func (ur *UserRepositoryImpl) GetUserById(id int) models.User {
