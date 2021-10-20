@@ -33,6 +33,9 @@ func (UserHandler UserHandlerImpl) CreateUser(c echo.Context) error {
 	firstName := c.FormValue("firstName")
 	lastName := c.FormValue("lastName")
 
+	println(firstName)
+	println(lastName)
+
 	UserHandler.userService.CreateUser(lastName, firstName)
 
 	return c.JSON(http.StatusOK, "hoge")

@@ -16,4 +16,6 @@ func init() {
 	if err != nil {
 		panic(err)
 	}
+
+	println("db init.")
 }
