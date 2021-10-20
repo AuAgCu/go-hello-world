@@ -30,8 +30,8 @@
                       // Use the vue-resource $http client to fetch data from the /tasks route
                       axios.get('/tasks').then(function(response) {
                           // this.tasks = response.data.items ? response.data.items : []
-                          console.log(this.tasks);
-                          this.tasks.push(response.data.items[0])
+                          console.log(vm.tasks);
+                          vm.tasks.push(response.data.items[0])
                       })
                   },
                   clearTask: function() {
