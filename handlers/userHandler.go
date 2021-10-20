@@ -29,14 +29,15 @@ func (userHandler UserHandlerImpl) GetUser(c echo.Context) error {
 	return c.JSON(http.StatusOK, models.GetUser())
 }
 
-func (UserHandler UserHandlerImpl) CreateUser(c echo.Context) error {
+func (userHandler UserHandlerImpl) CreateUser(c echo.Context) error {
+	println("hogehoge")
 	firstName := c.FormValue("firstName")
 	lastName := c.FormValue("lastName")
 
 	println(firstName)
 	println(lastName)
 
-	UserHandler.userService.CreateUser(lastName, firstName)
+	userHandler.userService.CreateUser(lastName, firstName)
 
 	return c.JSON(http.StatusOK, "hoge")
 }

@@ -43,10 +43,11 @@
                       this.tasks = [];
                   },
                   send: function() {
+                      axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
                       const data = { firstName: this.firstName, lastName: this.lastName };
                       console.log(data);
                       axios.post('/user', data).then(function(response) {
-
+                          console.log(response);
                       })
                   }
                 }
