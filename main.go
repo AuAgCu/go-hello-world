@@ -20,7 +20,7 @@ func main() {
 	e.Use(middleware.CORS())
 	e.File("/", "public/index.html")
 	e.GET("/tasks", handlers.GetTasks)
-	e.GET("/user", userHandler.GetUser)
+	e.GET("/user/:id", userHandler.GetUser)
 
 	e.POST("/user", userHandler.CreateUser)
 
