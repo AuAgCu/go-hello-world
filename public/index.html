@@ -8,6 +8,9 @@
         <div id="hoge">
             <h1>{{message}}</h1>
             <input v-model="message">
+            <input v-model="lastName">
+            <input v-model="firstName">
+            <button v-on:click="send">送信</button>
             <button v-on:click="showTask">Hello, World</button>
             <button v-on:click="clearTask">clear</button>
             <ul>
@@ -22,7 +25,9 @@
 
                 data: {
                     tasks: [],
-                    message: 'Hello Vue.js'
+                    message: 'Hello Vue.js',
+                    firstName: '',
+                    lastName: '',
                 },
 
                 methods: {
@@ -36,6 +41,12 @@
                   },
                   clearTask: function() {
                       this.tasks = [];
+                  },
+                  send: function() {
+                      const data = { firstName: this.firstName, lastName: this.lastName };
+                      axios.post('/user', data).then(function(response) {
+
+                      })
                   }
                 }
             })
