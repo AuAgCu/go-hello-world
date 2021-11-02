@@ -1,25 +1,47 @@
 <html>
-    <head>
-        <!-- Vue.js -->
-        <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>        
-    </head>
-    <body>
-        <div id="hoge">
-            <h1>ログイン画面</h1>
-            <input v-model="email">
-            <input type="password" v-model="password">
-            <button v-on:click="send">送信</button>
-        </div>
-        <script>
-            let vm = new Vue({
-                el: '#hoge',
 
-                data: {
-                    email: '',
-                    password: '',
+<head>
+    <!-- Vue.js -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <!-- firebase.js -->
+    <script src="https://www.gstatic.com/firebasejs/4.3.0/firebase.js"></script>
+    <script src="public/js/firebaseConfig.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <h1>ログイン画面</h1>
+        <input v-model="email">
+        <input type="password" v-model="password">
+        <button v-on:click="signIn">送信</button>
+    </div>
+    <script>
+        let vm = new Vue({
+            el: '#app',
+
+            data: {
+                email: '',
+                password: '',
+            },
+            methods: {
+                signIn: function () {
+                    firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(res => {
+                        firebase.auth().currentUser.getIdToken(true).then(function (idToken) {
+                            console.log(idToken);
+                        }).catch(function (error) {
+                           
+                        });
+                    }).catch((error) => {
+                        var errorCode = error.code;
+                        var errorMessage = error.message;
+                        console.log(errorCode);
+                        console.log(errorMessage);
+                    });
                 },
-            })
-        </script>
-    </body>
+            },
+        })
+    </script>
+</body>
+
 </html>
