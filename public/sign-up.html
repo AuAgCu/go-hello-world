@@ -1,0 +1,68 @@
+<html>
+
+<head>
+    <!-- Vue.js -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.3.0/firebase.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.css" />
+</head>
+
+<body>
+    <div id="hoge">
+        <h1>新規登録画面</h1>
+        <input v-model="email">
+        <input type="password" v-model="password">
+        <button v-on:click="signUp">送信</button>
+    </div>
+    <script>
+        // Import the functions you need from the SDKs you need
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+      
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+          apiKey: "AIzaSyCFjTtaTVcNEOQVqJt3S9FcBmywd11IORs",
+          authDomain: "go-test-5007f.firebaseapp.com",
+          projectId: "go-test-5007f",
+          storageBucket: "go-test-5007f.appspot.com",
+          messagingSenderId: "675509811756",
+          appId: "1:675509811756:web:e9658e52743d9a6680af89"
+        };
+      
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+    </script>
+    <script>
+
+        let vm = new Vue({
+            el: '#hoge',
+
+            data: {
+                email: '',
+                password: '',
+            },
+
+            methods: {
+                signUp: function () {
+
+                    firebase.auth().createUserWithEmailAndPassword(this.email, this.password)
+                        .then((userCredential) => {
+                            // Signed in
+                            var user = userCredential.user;
+                            firebase.auth().currentUser.sendEmailVerification();
+                        })
+                        .catch((error) => {
+                            var errorCode = error.code;
+                            var errorMessage = error.message;
+                            console.log(errorCode);
+                            console.log(errorMessage);
+                        });
+                },
+            }
+        })
+    </script>
+</body>
+
+</html>
