@@ -1,6 +1,8 @@
 package main
 
 import (
+	"os"
+
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
 
@@ -11,9 +13,12 @@ import (
 
 var tr = repository.NewUserReporitory(repository.Db)
 var userService = service.NewUserService(tr)
+var authService = service.NewAuthService()
 var userHandler = handlers.NewUserHandler(userService)
+var authHandler = handlers.NewAuthHandler(authService)
 
 func main() {
+
 	e := echo.New()
 	e.Use(middleware.CORS())
 
@@ -27,6 +32,6 @@ func main() {
 
 	e.POST("/user", userHandler.CreateUser)
 
-	// e.Start(":" + os.Getenv("PORT"))
-	e.Start(":8080")
+	e.Start(":" + os.Getenv("PORT"))
+	// e.Start(":8080")
 }
