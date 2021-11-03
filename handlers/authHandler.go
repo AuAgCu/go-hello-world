@@ -9,19 +9,21 @@ import (
 	"github.com/labstack/echo"
 )
 
+var AuthHandlerSingleton = &authHandlerImpl{}
+
 type AuthHandler interface {
 	Verify(c echo.Context) error
 }
 
-type AuthHandlerImpl struct {
+type authHandlerImpl struct {
 	authService service.AuthService
 }
 
 func NewAuthHandler(authService service.AuthService) AuthHandler {
-	return &AuthHandlerImpl{authService}
+	return &authHandlerImpl{authService}
 }
 
-func (authHandler AuthHandlerImpl) Verify(c echo.Context) error {
+func (authHandler authHandlerImpl) Verify(c echo.Context) error {
 	authHeader := c.Request().Header.Get("Authorization")
 	jwtToken := strings.Replace(authHeader, "Bearer ", "", 1)
 

@@ -6,6 +6,7 @@ import (
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
 
+	"app/authmiddleware"
 	firebaseUtil "app/firebase"
 	"app/handlers"
 	"app/repository"
@@ -14,9 +15,7 @@ import (
 
 var tr = repository.NewUserReporitory(repository.Db)
 var userService = service.NewUserService(tr)
-var authService = service.NewAuthService()
 var userHandler = handlers.NewUserHandler(userService)
-var authHandler = handlers.NewAuthHandler(authService)
 
 func main() {
 	firebaseUtil.FirebaseUtil.InitFirebase()
@@ -30,9 +29,11 @@ func main() {
 	e.File("/login", "public/login.html")
 	e.File("/signup", "public/sign-up.html")
 	e.GET("/tasks", handlers.GetTasks)
-	e.GET("/user/:id", userHandler.GetUser)
 
-	e.POST("/user", userHandler.CreateUser)
+	user := e.Group("/user")
+	user.Use(authmiddleware.AuthMiddlewareEntity.Verify())
+	user.GET("/:id", userHandler.GetUser)
+	user.POST("/", userHandler.CreateUser)
 
 	e.Start(":" + os.Getenv("PORT"))
 	// e.Start(":8080")

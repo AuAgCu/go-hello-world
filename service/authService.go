@@ -7,18 +7,16 @@ import (
 	"log"
 )
 
+var AuthServiceSingleton = &authServiceImpl{}
+
 type AuthService interface {
 	Verify(jwtToken string) bool
 }
 
-type AuthServiceImpl struct {
+type authServiceImpl struct {
 }
 
-func NewAuthService() AuthService {
-	return &AuthServiceImpl{}
-}
-
-func (authservice AuthServiceImpl) Verify(jwtToken string) bool {
+func (authservice authServiceImpl) Verify(jwtToken string) bool {
 
 	auth, err := firebaseUtil.FirebaseUtil.App.Auth(context.Background())
 	if err != nil {
