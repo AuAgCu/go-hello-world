@@ -1,11 +1,10 @@
 package service
 
 import (
+	firebaseUtil "app/firebase"
 	"context"
 	"fmt"
 	"log"
-
-	firebase "firebase.google.com/go"
 )
 
 type AuthService interface {
@@ -20,13 +19,8 @@ func NewAuthService() AuthService {
 }
 
 func (authservice AuthServiceImpl) Verify(jwtToken string) bool {
-	app, err := firebase.NewApp(context.Background(), nil)
-	if err != nil {
-		log.Fatalf("error initializing app: %v\n", err)
-		return false
-	}
 
-	auth, err := app.Auth(context.Background())
+	auth, err := firebaseUtil.FirebaseUtil.App.Auth(context.Background())
 	if err != nil {
 		fmt.Printf("error: %v\n", err)
 		return false

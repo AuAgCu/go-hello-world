@@ -6,6 +6,7 @@ import (
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
 
+	firebaseUtil "app/firebase"
 	"app/handlers"
 	"app/repository"
 	"app/service"
@@ -18,6 +19,7 @@ var userHandler = handlers.NewUserHandler(userService)
 var authHandler = handlers.NewAuthHandler(authService)
 
 func main() {
+	firebaseUtil.FirebaseUtil.InitFirebase()
 
 	e := echo.New()
 	e.Use(middleware.CORS())
