@@ -1,4 +1,4 @@
-package authmiddleware
+package auth
 
 import (
 	"strings"

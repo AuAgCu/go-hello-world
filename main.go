@@ -6,7 +6,7 @@ import (
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
 
-	"app/authmiddleware"
+	"app/auth"
 	firebaseUtil "app/firebase"
 	"app/handlers"
 	"app/repository"
@@ -31,7 +31,7 @@ func main() {
 	e.GET("/tasks", handlers.GetTasks)
 
 	user := e.Group("/user")
-	user.Use(authmiddleware.AuthMiddlewareEntity.Verify())
+	user.Use(auth.AuthMiddlewareEntity.Verify())
 	user.GET("/:id", userHandler.GetUser)
 	user.POST("/", userHandler.CreateUser)
 
