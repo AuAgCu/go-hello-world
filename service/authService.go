@@ -1,10 +1,14 @@
 package service
 
 import (
-	firebaseUtil "app/firebase"
 	"context"
 	"fmt"
 	"log"
+	"os"
+
+	firebase "firebase.google.com/go"
+	"golang.org/x/oauth2/google"
+	"google.golang.org/api/option"
 )
 
 var AuthServiceSingleton = &authServiceImpl{}
@@ -17,8 +21,17 @@ type authServiceImpl struct {
 }
 
 func (authservice authServiceImpl) Verify(jwtToken string) bool {
-	println(jwtToken)
-	auth, err := firebaseUtil.FirebaseUtil.App.Auth(context.Background())
+	credentials, err := google.CredentialsFromJSON(context.Background(), []byte(os.Getenv("FIREBASE_KEYFILE_JSON")))
+	if err != nil {
+		log.Printf("error credentials from json: %v\n", err)
+	}
+	opt := option.WithCredentials(credentials)
+	app, err := firebase.NewApp(context.Background(), nil, opt)
+	if err != nil {
+		log.Printf("error initializing app: %v\n", err)
+	}
+
+	auth, err := app.Auth(context.Background())
 	if err != nil {
 		fmt.Printf("error: %v\n", err)
 		return false
