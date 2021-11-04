@@ -32,8 +32,8 @@
                     }).then(function (response) {
                         let data = response.data;
                         console.log(data);
-                        this.firstName = data['firstName'];
-                        this.lastName = data['lastName'];
+                        vm.firstName = data['firstName'];
+                        vm.lastName = data['lastName'];
                     })
                 }
             }
