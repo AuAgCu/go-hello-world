@@ -28,7 +28,6 @@ func (firebaseUtil firebaseUtil) InitFirebase() {
 	}
 
 	println(app)
-	println(firebaseUtil.App)
 
 	firebaseUtil.App = *app
 	println("firebase init")
