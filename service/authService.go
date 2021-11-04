@@ -24,6 +24,10 @@ func (authservice authServiceImpl) Verify(jwtToken string) bool {
 		return false
 	}
 
+	if auth == nil {
+		println("auth = null")
+		return false
+	}
 	token, err := auth.VerifyIDToken(context.Background(), jwtToken)
 	if err != nil {
 		fmt.Printf("error verifying ID token: %v\n", err)
