@@ -31,7 +31,10 @@
                             console.log(jwtToken);
                             localStorage.setItem('jwtToken', idToken);
                         }).catch(function (error) {
-                           
+                            var errorCode = error.code;
+                            var errorMessage = error.message;
+                            console.log(errorCode);
+                            console.log(errorMessage);
                         });
                     }).catch((error) => {
                         var errorCode = error.code;
