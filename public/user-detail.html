@@ -30,7 +30,9 @@
                             Authorization: `Bearer ${token}`,
                         }
                     }).then(function (response) {
-                        console.log(response);
+                        let data = response.data;
+                        this.firstName = data['firstName'];
+                        this.lastName = data['lastName'];
                     })
                 }
             }
