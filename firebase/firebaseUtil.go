@@ -28,4 +28,5 @@ func (firebaseUtil firebaseUtil) InitFirebase() {
 	}
 
 	firebaseUtil.App = app
+	println("firebase init")
 }

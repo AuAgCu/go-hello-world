@@ -18,6 +18,9 @@ type authServiceImpl struct {
 
 func (authservice authServiceImpl) Verify(jwtToken string) bool {
 	println(jwtToken)
+	if firebaseUtil.FirebaseUtil.App == nil {
+		return false
+	}
 	auth, err := firebaseUtil.FirebaseUtil.App.Auth(context.Background())
 	if err != nil {
 		fmt.Printf("error: %v\n", err)
