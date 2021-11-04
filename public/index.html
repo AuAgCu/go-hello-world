@@ -13,6 +13,7 @@
             <button v-on:click="send">送信</button>
             <button v-on:click="showTask">Hello, World</button>
             <button v-on:click="clearTask">clear</button>
+            <button v-on:click="logout">logout</button>
             <ul>
                 <li v-for="task in tasks">
                     {{ task.name }}
@@ -49,6 +50,9 @@
                       axios.post('/user', data).then(function(response) {
                           console.log(response);
                       })
+                  },
+                  logout: function() {
+                      localStorage.removeItem("jwtToken");
                   }
                 }
             })
