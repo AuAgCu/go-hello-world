@@ -27,6 +27,9 @@ func (firebaseUtil firebaseUtil) InitFirebase() {
 		log.Printf("error initializing app: %v\n", err)
 	}
 
+	println(app)
+	println(firebaseUtil.App)
+
 	firebaseUtil.App = app
 	println("firebase init")
 }
