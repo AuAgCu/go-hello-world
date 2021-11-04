@@ -28,6 +28,7 @@
                 signIn: function () {
                     firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(res => {
                         firebase.auth().currentUser.getIdToken(true).then(function (idToken) {
+                            console.log(jwtToken);
                             localStorage.setItem('jwtToken', idToken);
                         }).catch(function (error) {
                            

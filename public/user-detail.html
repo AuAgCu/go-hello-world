@@ -1,0 +1,35 @@
+<html>
+    <head>
+        <!-- Vue.js -->
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>        
+    </head>
+    <body>
+        <div id="hoge">
+            <input v-model="userId">
+            <p>{{firstName + lastName}}</p>
+            <button v-on:click="getUser">送信</button>
+        </div>
+        <script>
+            let vm = new Vue({
+                el: '#hoge',
+
+                data: {
+                    firstName: '',
+                    lastName: '',
+                    userId: '',
+                },
+
+                methods: {
+                  getUser: function() {
+                      axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+                      console.log(data);
+                      axios.get('/user' + this.userId, data).then(function(response) {
+                          console.log(response);
+                      })
+                  }
+                }
+            })
+        </script>
+    </body>
+</html>

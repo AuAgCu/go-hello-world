@@ -27,6 +27,7 @@ func main() {
 
 	e.File("/", "public/index.html")
 	e.File("/login", "public/login.html")
+	e.File("/user-detail", "public/user-detail")
 	e.File("/signup", "public/sign-up.html")
 	e.GET("/tasks", handlers.GetTasks)
 
