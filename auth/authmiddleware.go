@@ -23,7 +23,6 @@ func (authMiddleWare authMiddleWareImpl) Verify() echo.MiddlewareFunc {
 		return func(c echo.Context) error {
 			authHeader := c.Request().Header.Get("Authorization")
 			jwtToken := strings.Replace(authHeader, "Bearer ", "", 1)
-			println(jwtToken)
 			authMiddleWare.authService.Verify(jwtToken)
 
 			if err := next(c); err != nil {
