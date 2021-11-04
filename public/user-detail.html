@@ -4,6 +4,10 @@
     <!-- Vue.js -->
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <!-- firebase.js -->
+    <script src="https://www.gstatic.com/firebasejs/4.3.0/firebase.js"></script>
+    <script src="public/js/firebaseConfig.js"></script>
 </head>
 
 <body>
@@ -38,6 +42,9 @@
                 }
             }
         })
+
+        let user = firebase.auth().currentUser;
+        console.log(user);
     </script>
 </body>
 
