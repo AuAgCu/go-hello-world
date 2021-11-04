@@ -1,6 +1,7 @@
 package auth
 
 import (
+	"net/http"
 	"strings"
 
 	"app/service"
@@ -23,7 +24,9 @@ func (authMiddleWare authMiddleWareImpl) Verify() echo.MiddlewareFunc {
 		return func(c echo.Context) error {
 			authHeader := c.Request().Header.Get("Authorization")
 			jwtToken := strings.Replace(authHeader, "Bearer ", "", 1)
-			authMiddleWare.authService.Verify(jwtToken)
+			if !authMiddleWare.authService.Verify(jwtToken) {
+				return c.JSON(http.StatusUnauthorized, "hoge")
+			}
 
 			if err := next(c); err != nil {
 				c.Error(err)
