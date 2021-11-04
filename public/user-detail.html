@@ -24,7 +24,7 @@
 
             methods: {
                 getUser: function () {
-                    let token = localStorage.get('jwtToken')
+                    let token = localStorage.getItem('jwtToken')
                     axios.get('/user/' + this.userId, {
                         headers: {
                             Authorization: `Bearer ${token}`,
