@@ -2,6 +2,7 @@ package firebaseUtil
 
 import (
 	"context"
+	"fmt"
 	"log"
 	"os"
 
@@ -27,7 +28,10 @@ func (firebaseUtil firebaseUtil) InitFirebase() {
 		log.Printf("error initializing app: %v\n", err)
 	}
 
-	println(app)
+	_, err = app.Auth(context.Background())
+	if err != nil {
+		fmt.Printf("error: %v\n", err)
+	}
 
 	firebaseUtil.App = *app
 	println("firebase init")
