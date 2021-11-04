@@ -13,7 +13,7 @@ import (
 var FirebaseUtil = &firebaseUtil{}
 
 type firebaseUtil struct {
-	App *firebase.App
+	App firebase.App
 }
 
 func (firebaseUtil firebaseUtil) InitFirebase() {
@@ -30,6 +30,6 @@ func (firebaseUtil firebaseUtil) InitFirebase() {
 	println(app)
 	println(firebaseUtil.App)
 
-	firebaseUtil.App = app
+	firebaseUtil.App = *app
 	println("firebase init")
 }
